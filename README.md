@@ -26,6 +26,10 @@ The rest is a choose-your-own-adventure. Use technologies you are comfortable wi
 - Use whatever UI library you want, or just use vanilla Tailwind.
 - Fetch the data how you want. We like react-query, but it's up to you.
 
+### Example Demo
+
+![Solution demo](demo.gif)
+
 ### Other notes
 
 - You shouldn't have to modify the type files at all
