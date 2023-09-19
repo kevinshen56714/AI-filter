@@ -2,7 +2,7 @@
 
 ### Overview
 
-- Fork this repository
+- Clone this repository
 - Implement your solution
 - Email tim@mydeliverable.com with a link to your repository
 - A short debrief call to discuss your solution will be scheduled if applicable
