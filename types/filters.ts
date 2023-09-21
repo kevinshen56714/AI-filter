@@ -7,5 +7,5 @@ export type FilterResponse = {
 export type Filters = {
   startYear?: number; // Start year, inclusive
   endYear?: number; // End year, inclusive
-  genres?: string[];
+  genres?: string[]; // Capitalized
 };

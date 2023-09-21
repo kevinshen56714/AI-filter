@@ -1,18 +1,25 @@
+import { useState } from 'react';
+
+import { Badge } from '@/components/Badge';
+import { FilterSection } from '@/components/FilterSection';
+import { Input } from '@/components/Input';
 import { Filters } from '@/types/filters';
 import { XCircleIcon } from '@heroicons/react/24/outline';
-
-import { Badge } from './Badge';
-import { FilterSection } from './FilterSection';
 
 export const FilterSideBar = ({
   filters,
   genreCounts,
+  yearRange,
   onFilterChange,
 }: {
   filters: Filters;
   genreCounts: { [key: string]: number };
+  yearRange: number[];
   onFilterChange: (filters: Filters) => void;
 }) => {
+  const [minYear, setMinYear] = useState<number>(filters.startYear || NaN);
+  const [maxYear, setMaxYear] = useState<number>(filters.endYear || NaN);
+
   const handleBadgeClick = (value: string) => {
     //if value is not in genres, add it, else remove it
     if (filters.genres?.includes(value)) {
@@ -23,22 +30,22 @@ export const FilterSideBar = ({
     onFilterChange(filters);
   };
 
+  const handleYearSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    filters.startYear = minYear;
+    filters.endYear = maxYear;
+    onFilterChange(filters);
+  };
+
+  const getInputValue = (value: number | undefined): string =>
+    value === undefined || isNaN(value) ? '' : value.toString();
+
   return (
     <div className="h-fit rounded-t-lg border border-gray-300 bg-gray-50 text-sm font-bold text-gray-900 shadow-sm">
-      {Object.values(filters).flat().length ? (
+      {filters.genres?.length ? (
         <div className="p-4 pb-2">
-          <div>Current filters:</div>
+          <div>Current genres:</div>
           <div className="mt-3 flex flex-wrap">
-            {filters.startYear && (
-              <Badge value={filters.startYear.toString()} onClickCallBack={(v) => {}}>
-                <XCircleIcon className="h-5 w-5"></XCircleIcon>
-              </Badge>
-            )}
-            {filters.endYear && (
-              <Badge value={filters.endYear.toString()} onClickCallBack={(v) => {}}>
-                <XCircleIcon className="h-5 w-5"></XCircleIcon>
-              </Badge>
-            )}
             {filters.genres &&
               filters.genres.map((genre, i) => (
                 <Badge key={i} value={genre} highlighted onClickCallBack={handleBadgeClick}>
@@ -65,6 +72,38 @@ export const FilterSideBar = ({
             ))}
           </div>
         ) : null}
+      </FilterSection>
+      <FilterSection title="Year">
+        {!!yearRange[0] && !!yearRange[1] && (
+          <form className="flex flex-col gap-6 mt-2" onSubmit={handleYearSubmit}>
+            <legend className="sr-only">Year Range</legend>
+            <Input
+              id="minYear"
+              type="number"
+              label="Min Year"
+              placeholder={getInputValue(yearRange[0])}
+              value={getInputValue(minYear)}
+              inputMode="numeric"
+              size={15}
+              min={1900}
+              max={new Date().getFullYear()}
+              onChange={(e) => setMinYear(parseInt(e.currentTarget.value))}
+            />
+            <Input
+              id="maxYear"
+              type="number"
+              label="Max Year"
+              placeholder={getInputValue(yearRange[1])}
+              value={getInputValue(maxYear)}
+              inputMode="numeric"
+              size={15}
+              min={1900}
+              max={new Date().getFullYear()}
+              onChange={(e) => setMaxYear(parseInt(e.currentTarget.value))}
+            />
+            <button type="submit"></button>
+          </form>
+        )}
       </FilterSection>
     </div>
 

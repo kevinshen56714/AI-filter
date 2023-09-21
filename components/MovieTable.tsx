@@ -49,6 +49,9 @@ export const MovieTable = ({
             <tr>
               <td colSpan={3} className="bg-white py-5 text-center">
                 No matching movies found
+                <div className="font-bold underline">
+                  <Link href={'/'}>Reset</Link>
+                </div>
               </td>
             </tr>
           )}

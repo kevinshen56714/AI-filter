@@ -55,6 +55,11 @@ export default function MovieList() {
     [movies],
   );
 
+  const yearRange = useMemo(() => {
+    const years = movies?.map((movie) => movie.year);
+    return years.length > 0 ? [Math.min(...years), Math.max(...years)] : [NaN, NaN];
+  }, [movies]);
+
   const onFilterChange = (filters: Filters) => {
     if (filters.genres?.length === 0) {
       delete filters.genres;
@@ -83,7 +88,7 @@ export default function MovieList() {
       {movies && !isMoviesError && !isMoviesLoading && (
         <>
           <AIFilter onFilterChange={onFilterChange} />
-          <div className="grid grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+          <div className="grid grid-cols-3 lg:grid-cols-4 lg:gap-x-6 mt-4">
             <div className="col-span-3 mb-2 flex items-end justify-between">
               <div className="text-sm text-gray-500">Showing {movies.length} movies</div>
               <DropdownMenu
@@ -98,7 +103,12 @@ export default function MovieList() {
             </div>
 
             <div className="hidden lg:block col-span-1">
-              <FilterSideBar filters={filters} genreCounts={genreCounts!} onFilterChange={onFilterChange} />
+              <FilterSideBar
+                filters={filters}
+                genreCounts={genreCounts!}
+                yearRange={yearRange}
+                onFilterChange={onFilterChange}
+              />
             </div>
           </div>
         </>
