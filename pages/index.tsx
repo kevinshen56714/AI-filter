@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
@@ -11,6 +12,7 @@ import { useGetMovies } from '@/react-query/movie';
 import { Filters } from '@/types/filters';
 import { Movie } from '@/types/movie';
 import { useFilterParams } from '@/utils/utils';
+import { ArrowPathIcon } from '@heroicons/react/24/solid';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -97,7 +99,12 @@ export default function MovieList() {
                 onChangeCallback={setSortBy}
               ></DropdownMenu>
             </div>
-            <h2 className="hidden lg:block col-span-1 my-2 text-lg font-medium text-gray-900">Filter by</h2>
+            <div className="hidden lg:flex items-center gap-1 col-span-1 my-2 text-lg font-medium text-gray-900">
+              <h2>Filter by</h2>
+              <Link href={'/'}>
+                <ArrowPathIcon className="h-5 w-5 text-gray-400"></ArrowPathIcon>
+              </Link>
+            </div>
             <div className="col-span-3">
               <MovieTable movies={movies} filters={filters} onFilterChange={onFilterChange} />
             </div>
