@@ -9,7 +9,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const parsedGenres = (genres as string)?.split(',');
   let movies = movieJson;
 
-  // filter movies by startYear if startYear exists, endYear if endYear exists, and genres exists
   if (startYear) {
     movies = movies.filter((movie) => movie.year >= Number(startYear));
   }
@@ -17,8 +16,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     movies = movies.filter((movie) => movie.year <= Number(endYear));
   }
   if (parsedGenres) {
+    // Filter movies that have all the genres in the parsedGenres array
     movies = movies.filter((movie) => {
-      return movie.genres.some((genre) => parsedGenres.includes(genre));
+      return parsedGenres.every((genre) => movie.genres.includes(genre));
     });
   }
 
