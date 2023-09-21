@@ -8,9 +8,9 @@ export const DropdownMenu = ({
   selected,
   onChangeCallback,
 }: {
-  options: Array<string | number>;
-  selected: string | number;
-  onChangeCallback: Dispatch<SetStateAction<string | number>>;
+  options: Array<string>;
+  selected: string;
+  onChangeCallback: Dispatch<SetStateAction<string>>;
 }) => {
   return (
     <div>
