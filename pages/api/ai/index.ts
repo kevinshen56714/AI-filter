@@ -1,12 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
+import path from 'path';
 import { createJsonTranslator, createLanguageModel } from 'typechat';
 
 import movieJson from '@/json/movies.json';
 import { FilterResponse } from '@/types/filters';
 
 const model = createLanguageModel(process.env);
-const schema = fs.readFileSync('./types/filters.ts', 'utf-8');
+const typesDirectory = path.resolve(process.cwd(), 'types');
+
+const schema = fs.readFileSync(path.join(typesDirectory, 'filters.ts'), 'utf-8');
 const translator = createJsonTranslator<FilterResponse>(model, schema, 'FilterResponse');
 const allGenres = Array.from(new Set(movieJson.flatMap((movie) => movie.genres)));
 
