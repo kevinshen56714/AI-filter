@@ -79,36 +79,34 @@ export const FilterSideBar = ({
         ) : null}
       </FilterSection>
       <FilterSection title="Year">
-        {!!yearRange[0] && !!yearRange[1] && (
-          <form className="flex flex-col gap-6 mt-2" onSubmit={handleYearSubmit}>
-            <legend className="sr-only">Year Range</legend>
-            <Input
-              id="minYear"
-              type="number"
-              label="Min Year"
-              placeholder={getInputValue(yearRange[0])}
-              value={getInputValue(minYear)}
-              inputMode="numeric"
-              size={15}
-              min={1900}
-              max={new Date().getFullYear()}
-              onChange={(e) => setMinYear(parseInt(e.currentTarget.value))}
-            />
-            <Input
-              id="maxYear"
-              type="number"
-              label="Max Year"
-              placeholder={getInputValue(yearRange[1])}
-              value={getInputValue(maxYear)}
-              inputMode="numeric"
-              size={15}
-              min={1900}
-              max={new Date().getFullYear()}
-              onChange={(e) => setMaxYear(parseInt(e.currentTarget.value))}
-            />
-            <button type="submit"></button>
-          </form>
-        )}
+        <form className="flex flex-col gap-6 mt-2" onSubmit={handleYearSubmit}>
+          <legend className="sr-only">Year Range</legend>
+          <Input
+            id="minYear"
+            type="number"
+            label="Min Year"
+            placeholder={getInputValue(yearRange[0])}
+            value={getInputValue(minYear)}
+            inputMode="numeric"
+            size={15}
+            min={1900}
+            max={new Date().getFullYear()}
+            onChange={(e) => setMinYear(parseInt(e.currentTarget.value))}
+          />
+          <Input
+            id="maxYear"
+            type="number"
+            label="Max Year"
+            placeholder={getInputValue(yearRange[1])}
+            value={getInputValue(maxYear)}
+            inputMode="numeric"
+            size={15}
+            min={1900}
+            max={new Date().getFullYear()}
+            onChange={(e) => setMaxYear(parseInt(e.currentTarget.value))}
+          />
+          <button type="submit"></button>
+        </form>
       </FilterSection>
     </div>
   );
