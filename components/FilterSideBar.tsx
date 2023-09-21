@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Badge } from '@/components/Badge';
 import { FilterSection } from '@/components/FilterSection';
@@ -17,8 +17,8 @@ export const FilterSideBar = ({
   yearRange: number[];
   onFilterChange: (filters: Filters) => void;
 }) => {
-  const [minYear, setMinYear] = useState<number>(filters.startYear || NaN);
-  const [maxYear, setMaxYear] = useState<number>(filters.endYear || NaN);
+  const [minYear, setMinYear] = useState<number>(NaN);
+  const [maxYear, setMaxYear] = useState<number>(NaN);
 
   const handleBadgeClick = (value: string) => {
     //if value is not in genres, add it, else remove it
@@ -29,6 +29,11 @@ export const FilterSideBar = ({
     }
     onFilterChange(filters);
   };
+
+  useEffect(() => {
+    setMinYear(filters.startYear || NaN);
+    setMaxYear(filters.endYear || NaN);
+  }, [filters]);
 
   const handleYearSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
