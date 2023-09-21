@@ -23,11 +23,11 @@ export const AIFilter = ({ onFilterChange }: { onFilterChange: (filters: Filters
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage('');
     if (!inputValue) {
       router.push('/');
       return;
     }
-    setErrorMessage('');
     mutateAsync({ prompt: inputValue })
       .then((res) => {
         if (res.error) {

@@ -84,7 +84,7 @@ export default function MovieList() {
 
       <div className="flex justify-center mt-10">
         {isMoviesLoading && <Spinner />}
-        {isMoviesError && 'Something went wrong!'}
+        {isMoviesError && 'Something went wrong while fetching movie data...'}
       </div>
 
       {movies && !isMoviesError && !isMoviesLoading && (
