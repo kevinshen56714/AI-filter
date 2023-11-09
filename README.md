@@ -10,7 +10,7 @@ This is a demo of using LLM ([OpenAI](https://openai.com/) GPT models) and [Type
 - A movie details page that displays some information about the selected movie
 - An "AI-powered" search that takes a natural language query and translates it to a set of filters to narrow down the results shown in the table.
 
-The site is created using Next, React, TypeScript, and Tailwind.
+The site is created using Next, React, React Query, HeadlessUI, Tailwind, and TypeScript.
 
 ### Deployment
 TypeChat requires an OpenAI API key, and this should be set in your `.env.local` file.
